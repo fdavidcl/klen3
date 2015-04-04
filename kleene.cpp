@@ -9,13 +9,13 @@ enum Ternary {
         False ==  false
         True  !=  false
         False !=  true
-        NA    !=  true
-        NA    !=  false
+        Unknown    !=  true
+        Unknown    !=  false
     **************************************/
     
     True = 1,
     False = 0,
-    NA = -1
+    Unknown = -1
 };
 
 class Klen {
@@ -24,7 +24,7 @@ private:
 
 public:
     
-    Klen() :value(NA) {}
+    Klen() :value(Unknown) {}
     
     Klen(Ternary v) { 
         *this = v; 
@@ -32,7 +32,7 @@ public:
     
     bool istrue()  { return value == True;  }
     bool isfalse() { return value == False; }
-    bool isna()    { return value == NA;    }
+    bool isna()    { return value == Unknown;    }
     
     const Klen& operator=(const Klen& otro) {
         value = otro.value;
@@ -52,30 +52,30 @@ public:
     Klen operator==(const Ternary& comp) {
         /********************************
         
-        == |  T  | NA |  F
+        == |  T  | Unknown |  F
         ---------------------
-        T  |  T  | NA |  F 
-        NA | NA  | NA | NA
-        F  |  F  | NA |  T
+        T  |  T  | Unknown |  F 
+        Unknown | Unknown  | Unknown | Unknown
+        F  |  F  | Unknown |  T
         
         ********************************/
         
         switch (value) {
             case True:
                 if (comp == True) return True;
-                else if (comp == NA) return NA;
+                else if (comp == Unknown) return Unknown;
                 else return False;
                 break;
             case False:
                 if (comp == False) return True;
-                else if (comp == NA) return NA;
+                else if (comp == Unknown) return Unknown;
                 else return False;
                 break;
-            case NA:
-                return NA;
+            case Unknown:
+                return Unknown;
                 break;
             default:
-                return NA;
+                return Unknown;
         }
     }
     
@@ -84,24 +84,7 @@ public:
         return *this == comp.value;
     }
     
-    /*bool operator==(const bool& boolean) {
-        return (*this == True && boolean) || (*this == False && !boolean);
-    }*/
-    
     operator Ternary() {
         return value;
     }
 };
-
-int main() {
-    std::cout << "True = " << True << ", False = " << False << ", NA = " << NA << std::endl;
-    
-    if (True == true)
-        std::cout << "True == true" << std::endl;
-    
-    if (True == false)
-        std::cout << "True == false !!" << std::endl;
-    
-    if (NA == true)
-        std::cout << "NA == true !!" << std::endl;
-}

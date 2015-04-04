@@ -1,3 +1,6 @@
 CPPFLAGS=-Wall
-EXE=$(basename $(wildcard *.cc, *.cpp))
-default: $(EXE)
+
+default: tests
+
+tests: tests.cpp kleene.cpp
+	$(CXX) -o $@ $< -I.

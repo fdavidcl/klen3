@@ -1,4 +1,4 @@
-Klen
+klen3
 ======================
 
 An implementation of three-valued logic with the 3-element Kleene algebra (K3) 

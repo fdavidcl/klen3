@@ -28,10 +28,46 @@ public:
 	Klen() { *this = Unknown; }
 	Klen(const Klen& v) { value = v.value; }
 	
-	bool istrue()       { return value == T;       }
-	bool isfalse()      { return value == F;       }
-	bool isunknown()    { return value == U;       }
-	bool issame(Klen b) { return value == b.value; }
+	bool issame(Klen b) const { return value == b.value; }
+	bool istrue() const       { return issame(True);     }
+	bool isfalse() const      { return issame(False);    }
+	bool isunknown() const    { return issame(Unknown);  }
+	
+/*
+	Now to our binary and unary operations: conjunction, 
+	disjunction and 'not'
+*/
+	Klen operator&&(const Klen& b) const {
+		if (isfalse() || b.isfalse())
+			return False;
+		else if (istrue() && b.istrue())
+			return True;
+		else
+			return Unknown;
+	}
+
+	Klen operator||(const Klen& b) const {
+		if (istrue() || b.istrue())
+			return True;
+		else if (isfalse() && b.isfalse())
+			return False;
+		else
+			return Unknown;
+	}
+	
+	Klen operator!() const {
+		if (istrue()) return False;
+		else if (isfalse()) return True;
+		else return Unknown;
+	}
+	
+/*
+	Only True is considered truthy
+	(and only False is considered falsy)
+*/
+	operator bool() {
+		return istrue();
+	}
 };
 
 const Klen Klen::True = Klen::T;

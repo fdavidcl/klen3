@@ -1,7 +1,18 @@
-/****************
-Attempt of sanity 
-****************/
+/*
 
+klen3
+======================
+An implementation of three-valued logic with the 3-element Kleene 
+algebra (K3) in C++. It takes the values True, False and Unknown. 
+
+Author: David Charte <fdavidcl@outlook.com>
+
+License information:
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+*/
 #ifndef __KLEN
 #define __KLEN
 

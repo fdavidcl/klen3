@@ -28,6 +28,18 @@ int main(int argc, char * argv[]) {
 	expect(True, True);
 	expect(False, False);
 	expect(Unknown, Unknown);
+	expect(True, true);
+	expect(False, false);
 	
+/*
+	Be careful! Operations with native booleans
+	will return boolean values
+*/
 	expect(Unknown, True && Unknown);
+	expect(false,   true && Unknown); //:(
+	
+	expect(Unknown, True == Unknown);
+	expect(False,   True == False);
+	expect(False,   False && Unknown);
+	expect(True,    True || Unknown);
 }

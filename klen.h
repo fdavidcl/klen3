@@ -22,16 +22,18 @@ public:
 	
 	Any value in K3 must be equal to either True, False or Unknown.
 	Thus, we only declare the default constructor and the copy 
-	constructor.
+	constructor. We'll also allow converting native booleans to Klen
+	objects.
 	
 */
-	Klen() { *this = Unknown; }
-	Klen(const Klen& v) { value = v.value; }
+	Klen()              { *this = Unknown;          }
+	Klen(const Klen& v) { *this = v;                }
+	Klen(const bool& v) { *this = v ? True : False; }
 	
 	bool issame(Klen b) const { return value == b.value; }
-	bool istrue() const       { return issame(True);     }
-	bool isfalse() const      { return issame(False);    }
-	bool isunknown() const    { return issame(Unknown);  }
+	bool istrue()       const { return issame(True);     }
+	bool isfalse()      const { return issame(False);    }
+	bool isunknown()    const { return issame(Unknown);  }
 	
 /*
 	Now to our binary and unary operations: conjunction, 
@@ -82,7 +84,7 @@ public:
 	Only True is considered truthy
 	(and only False is considered falsy)
 */
-	operator bool() {
+	operator bool() const {
 		return istrue();
 	}
 };

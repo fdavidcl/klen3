@@ -36,7 +36,8 @@ int main(int argc, char * argv[]) {
 	will return boolean values
 */
 	expect(Unknown, True && Unknown);
-	expect(false,   true && Unknown); //:(
+	expect(False,   true && Unknown); // :(
+	expect(False,   true == Unknown); // :(
 	
 	expect(Unknown, True == Unknown);
 	expect(False,   True == False);

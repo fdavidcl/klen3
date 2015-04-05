@@ -60,6 +60,23 @@ public:
 		else if (isfalse()) return True;
 		else return Unknown;
 	}
+
+/*
+	Let's implement comparison operators that are
+	consistent with the structure we have here
+*/
+	Klen operator==(const Klen& b) const {
+		if (isunknown() || b.isunknown())
+			return Unknown;
+		else if (issame(b))
+			return True;
+		else
+			return False;
+	}
+	
+	Klen operator!=(const Klen& b) const {
+		return !(*this == b);
+	}
 	
 /*
 	Only True is considered truthy

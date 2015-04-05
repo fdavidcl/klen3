@@ -1,6 +1,10 @@
 CPPFLAGS=-Wall
+EXE=main
 
-default: tests
+default: $(EXE)
 
-tests: tests.cpp kleene.cpp
+$(EXE): $(EXE).cc klen.h
 	$(CXX) -o $@ $< -I.
+	
+clean:
+	rm -f $(EXE)
